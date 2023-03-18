@@ -4,11 +4,13 @@ import{HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { SnakeComponent } from './snake/snake.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    SnakeComponent
   ],
   imports: [
     BrowserModule,
