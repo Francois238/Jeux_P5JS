@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5';
+import { GameService } from '../game.service';
+import { Score } from '../score';
 
 @Component({
   selector: 'app-snake',
@@ -9,12 +11,19 @@ import * as p5 from 'p5';
 export class SnakeComponent implements OnInit {
 
   info=" ";
+  score=0;
+  perdu=false;
+  nb_envoie=0;
 
-  constructor(
+  score_joueurs :Score[] = [];
 
-  ) {}
+  constructor(private gameService : GameService) {}
 
   ngOnInit() {
+
+    this.get_score_snake() //retrouver la liste des scores
+        
+
 
     new p5(p => {
       let xs= 50; //coord serpent
@@ -166,6 +175,7 @@ export class SnakeComponent implements OnInit {
             p.print("ok");
             manger=1;
             tour = 20;  //On bloque la suppression des 1eres coordonées du serpent pour l agrandir
+            this.score+=5;
 
           }
 
@@ -189,13 +199,50 @@ export class SnakeComponent implements OnInit {
         else{
 
           this.info="perdu";
+          this.perdu =true;
+          this.send_score()
+
+
 
         }
 
         };
     });
 
+
   }
+
+  public get_score_snake(){
+
+    this.gameService.get_score_snake().subscribe({
+
+      next: (data : Score[]) => {
+
+        this.score_joueurs = data;
+      },
+      error(err){
+        console.log(err);
+      }
+    })
+  }
+
+  public send_score(){
+
+    if (this.nb_envoie == 0){
+
+      this.gameService.send_score_snake(this.score).subscribe(
+        (data) => {
+          console.log(data);
+          this.nb_envoie=1;
+
+          this.get_score_snake();
+        }
+        
+      )
+    }
+  }
+  
 }
+
 
 
