@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
       error: (e) => {
         
         console.error(e)
-        this.message = "Mail ou password incorrect"
+        this.message = "Pseudo ou password incorrect"
       },
   })
     

@@ -4,6 +4,7 @@ import { GameService } from '../game.service';
 import { Score } from '../score';
 import { ScoreEnvoye } from '../score-envoye';
 
+
 @Component({
   selector: 'app-snake',
   templateUrl: './snake.component.html',
@@ -18,11 +19,15 @@ export class SnakeComponent implements OnInit {
 
   score_joueurs :Score[] = [];
 
+  my_score! : Score;
+
   constructor(private gameService : GameService) {}
 
   ngOnInit() {
 
     this.get_score_snake() //retrouver la liste des scores
+
+    this.get_my_score() //retrouver le rang du joueur
         
 
 
@@ -211,6 +216,15 @@ export class SnakeComponent implements OnInit {
 
   }
 
+  public get_my_score(){
+    this.gameService.get_my_score_snake().subscribe({
+      next: (data : Score) => {
+        this.my_score= data;
+
+      }
+    })
+  }
+
   public get_score_snake(){
 
     this.gameService.get_score_snake().subscribe({
@@ -236,6 +250,7 @@ export class SnakeComponent implements OnInit {
           console.log(data);
           
           this.get_score_snake();
+          this.get_my_score()
         }
         
       )

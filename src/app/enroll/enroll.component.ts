@@ -65,7 +65,7 @@ export class EnrollComponent implements OnInit {
       error: (e) => {
         
         console.error(e)
-        this.message = "Erreur dans creation de compte"
+        this.message = "Ce username est deja utilise"
       },
   })
     

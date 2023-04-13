@@ -40,4 +40,18 @@ export class GameService {
 
   }
 
+
+  public get_my_score_snake(): Observable<Score> {
+    const token = this.authenticationService.get_token();
+
+    console.log("token " + token)
+
+    const headers = {'Authorization': 'Bearer ' + token};
+
+    const url = this.urlBase + 'snake/me';
+
+    return this.http.get<Score>(url, {headers});
+
+  }
+
 }
