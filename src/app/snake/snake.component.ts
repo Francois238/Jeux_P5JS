@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5';
 import { GameService } from '../game.service';
 import { Score } from '../score';
+import { ScoreEnvoye } from '../score-envoye';
 
 @Component({
   selector: 'app-snake',
@@ -202,8 +203,6 @@ export class SnakeComponent implements OnInit {
           this.perdu =true;
           this.send_score()
 
-
-
         }
 
         };
@@ -226,15 +225,16 @@ export class SnakeComponent implements OnInit {
     })
   }
 
+
   public send_score(){
 
     if (this.nb_envoie == 0){
+      this.nb_envoie=1;
 
       this.gameService.send_score_snake(this.score).subscribe(
-        (data) => {
+        (data : Score) => {
           console.log(data);
-          this.nb_envoie=1;
-
+          
           this.get_score_snake();
         }
         

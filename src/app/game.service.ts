@@ -10,6 +10,8 @@ import { ScoreEnvoye } from './score-envoye';
 })
 export class GameService {
 
+  urlBase = "http://129.151.247.65:8080/"
+
   constructor(private http: HttpClient, private authenticationService : AuthenticationService) { }
 
   public send_score_snake(score: number): Observable<Score> {
@@ -21,7 +23,7 @@ export class GameService {
 
     const headers = { 'content-type': 'application/json', 'Authorization': 'Bearer ' + token};
     const body=JSON.stringify(scoreEnvoye);
-    const url = 'http://localhost:8080/snake';
+    const url = this.urlBase + 'snake';
     return this.http.patch<Score>(url, body ,{'headers':headers})
   }
 
@@ -32,7 +34,7 @@ export class GameService {
 
     const headers = {'Authorization': 'Bearer ' + token};
 
-    const url = 'http://localhost:8080/snake/top';
+    const url = this.urlBase + 'snake/top';
 
     return this.http.get<Score[]>(url, {headers});
 

@@ -8,6 +8,8 @@ import { Observable, map } from 'rxjs';
 })
 export class AuthenticationService {
 
+  urlBase = "http://129.151.247.65:8080/"
+
   constructor(private http: HttpClient) { }
 
   public set_token(token: string): void {
@@ -24,7 +26,7 @@ export class AuthenticationService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(user);
 
-    const url = 'http://localhost:8080/users';
+    const url =  this.urlBase + 'users';
     return this.http.post<any>(url, body ,{'headers':headers})
     
   }
@@ -34,7 +36,7 @@ export class AuthenticationService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(user);
 
-    const url = 'http://localhost:8080/login';
+    const url = this.urlBase + 'login';
     return this.http.post<any>(url, body ,{headers, observe: 'response'})
     .pipe(
       map(response => {
