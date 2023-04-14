@@ -21,6 +21,8 @@ export class SnakeComponent implements OnInit {
 
   my_score! : Score;
 
+  allowScroll: boolean = true;;
+
   constructor(private gameService : GameService) {}
 
   ngOnInit() {
@@ -28,6 +30,18 @@ export class SnakeComponent implements OnInit {
     this.get_score_snake() //retrouver la liste des scores
 
     this.get_my_score() //retrouver le rang du joueur
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        this.allowScroll = false;
+        window.scrollTo(0, window.scrollY);
+      }
+    });
+  
+    document.addEventListener('mousemove', (event) => {
+      this.allowScroll = (event.clientY > 100 && event.clientY < window.innerHeight - 100);
+    });
         
 
 

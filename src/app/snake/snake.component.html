@@ -1,50 +1,51 @@
 
-<h1>Welcome to Snake game!</h1>
+<div [ngClass]="{'no-scroll': !allowScroll}">
+  <h1>Welcome to Snake game!</h1>
 
-<div> Mon score : {{score}}</div> 
+  <div> Mon score : {{score}}</div> 
 
-<p>{{info}}</p>
+  <p>{{info}}</p>
 
-<div id="sketch"></div>
+  <div id="sketch"></div>
 
-<div>
-  <p>Mon classement </p>
-  <br>
+  <div>
+    <p>Mon classement </p>
+    <br>
 
-  <div class= "d-flex align-items-center text-center justify-content-center " style="height: 40px">
+    <div class= "d-flex align-items-center text-center justify-content-center " style="height: 40px">
 
-    <div class="col-3 h-100  border  mb-0">
-      <span class="d-block p-2 ">{{my_score.username}}  </span>
+      <div class="col-3 h-100  border  mb-0">
+        <span class="d-block p-2 ">{{my_score.username}}  </span>
 
-    </div>
+      </div>
 
-    <div class="col-3 h-100  border  mb-0" >
-      <span class="d-block p-2 titre">score : {{my_score.score}}</span>
+      <div class="col-3 h-100  border  mb-0" >
+        <span class="d-block p-2 titre">score : {{my_score.score}}</span>
+      </div>
+
     </div>
 
   </div>
 
+  <p>Classement general</p>
+  <br>
+
+  <ng-container *ngIf="score_joueurs.length > 0">
+      <ng-container *ngFor="let item of score_joueurs">
+
+          <div class= "d-flex align-items-center text-center justify-content-center " style="height: 40px">
+    
+              <div class="col-3 h-100  border  mb-0">
+                <span class="d-block p-2 ">{{item.username}}  </span>
+            
+              </div>
+            
+              <div class="col-3 h-100  border  mb-0" >
+                <span class="d-block p-2 titre">{{item.score}}</span>
+              </div>
+          </div>
+
+      </ng-container>
+  </ng-container>
+
 </div>
-
-<p>Classement general</p>
-<br>
-
-<ng-container *ngIf="score_joueurs.length > 0">
-    <ng-container *ngFor="let item of score_joueurs">
-
-        <div class= "d-flex align-items-center text-center justify-content-center " style="height: 40px">
-  
-            <div class="col-3 h-100  border  mb-0">
-              <span class="d-block p-2 ">{{item.username}}  </span>
-          
-            </div>
-          
-            <div class="col-3 h-100  border  mb-0" >
-              <span class="d-block p-2 titre">{{item.score}}</span>
-            </div>
-        </div>
-
-    </ng-container>
-</ng-container>
-
-
